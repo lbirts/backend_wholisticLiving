@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
     end
 
     def logged_in?
-        headers = reques.headers["Authorization"]
+        headers = request.headers["Authorization"]
         token = headers.split(" ")[1]
         begin
             user_id = JWT.decode(token, "final042020")[0]["user_id"]
@@ -16,4 +16,7 @@ class ApplicationController < ActionController::API
         end
         render json: {error: "Please Login"} unless user
     end
+
+    # protect_from_forgery unless: -> { request.format.json? }
+
 end

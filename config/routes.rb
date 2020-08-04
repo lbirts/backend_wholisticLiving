@@ -11,8 +11,13 @@ Rails.application.routes.draw do
       resources :comments
       resources :chatrooms
       resources :messages
+      resources :availabilities
+      resources :calls, only: :create
+      mount ActionCable.server, at: '/cable'
 
       post '/login', to: 'auth#create'
+      post '/signup', to: 'users#create'
+      # get '/profile', to: 'users#profile'
     end
   end
 end

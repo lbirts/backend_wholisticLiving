@@ -1,5 +1,5 @@
 class Api::V1::PostsController < ApplicationController
-    skip_before_action :logged_in?, only, [:index]
+    skip_before_action :logged_in?, only: [:index, :index]
 
     before_action :set_post, only: [:show, :update, :destroy]
 

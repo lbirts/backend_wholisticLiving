@@ -1,4 +1,5 @@
 class Api::V1::ProvidersController < ApplicationController
+    skip_before_action :logged_in?, only: [:index]
     before_action :set_provider, only: [:show, :update, :destroy]
 
   # GET /providers

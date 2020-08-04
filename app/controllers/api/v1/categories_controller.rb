@@ -1,5 +1,5 @@
 class Api::V1::CategoriesController < ApplicationController
-    skip_before_action :logged_in?, only, [:index, :show]
+    skip_before_action :logged_in?, only: [:index, :show]
     before_action :set_category, only: [:show, :update, :destroy]
 
   # GET /categories

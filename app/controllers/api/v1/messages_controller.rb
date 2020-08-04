@@ -16,9 +16,17 @@ class Api::V1::MessagesController < ApplicationController
   # POST /messages
   def create
     @message = Message.new(message_params)
-
+    chatroom = Chatroom.find(message_params["chatroom_id"])
+    provider = Provider.find(chatroom.provider.id)
+    client = Client.find(chatroom.client.id)
     if @message.save
-      render json: @message, status: :created, location: @message
+      ChatroomChannel.broadcast_to(chatroom, {
+        chatroom: ChatroomSerializer.new(chatroom),
+        provider: ProviderSerializer.new(provider),
+        client: ClientSerializer.new(client),
+        message: MessageSerializer.new(@message)
+      })
+      render json: {message: MessageSerializer.new(@message)}, status: :created
     else
       render json: @message.errors, status: :unprocessable_entity
     end
@@ -45,6 +53,6 @@ class Api::V1::MessagesController < ApplicationController
     end
 
     def message_params
-      params.require(:message).permit(:content, :user, :chatroom)
+      params.require(:message).permit(:content, :user_id, :chatroom_id)
     end
 end

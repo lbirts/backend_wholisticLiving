@@ -1,5 +1,6 @@
 class Api::V1::ClientsController < ApplicationController
     before_action :set_client, only: [:show, :update, :destroy]
+    skip_before_action :logged_in?, only: [:index]
 
   # GET /clients
   def index
@@ -18,7 +19,7 @@ class Api::V1::ClientsController < ApplicationController
     @client = Client.new(client_params)
 
     if @client.save
-      render json: @client, status: :created, location: @client
+      render json: { client: ClientSerializer.new(@client)}, status: :created, location: @client
     else
       render json: @client.errors, status: :unprocessable_entity
     end

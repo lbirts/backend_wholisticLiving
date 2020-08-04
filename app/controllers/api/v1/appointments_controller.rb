@@ -16,9 +16,8 @@ class Api::V1::AppointmentsController < ApplicationController
   # POST /appointments
   def create
     @appointment = Appointment.new(appointment_params)
-
     if @appointment.save
-      render json: @appointment, status: :created, location: @appointment
+      render json: { appointment: AppointmentSerializer.new(@appointment) }, status: :created
     else
       render json: @appointment.errors, status: :unprocessable_entity
     end
@@ -45,6 +44,6 @@ class Api::V1::AppointmentsController < ApplicationController
     end
 
     def appointment_params
-      params.require(:appointment).permit(:client_id, :provider_id, :date_time)
+      params.require(:appointment).permit(:client_id, :provider_id, :date_time, :notes, :status)
     end
 end

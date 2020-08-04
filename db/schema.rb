@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_15_201252) do
+ActiveRecord::Schema.define(version: 2020_07_28_155355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,14 +22,25 @@ ActiveRecord::Schema.define(version: 2020_07_15_201252) do
     t.string "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "status"
     t.index ["client_id"], name: "index_appointments_on_client_id"
     t.index ["provider_id"], name: "index_appointments_on_provider_id"
+  end
+
+  create_table "availabilities", force: :cascade do |t|
+    t.string "day"
+    t.time "time"
+    t.bigint "provider_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["provider_id"], name: "index_availabilities_on_provider_id"
   end
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
   end
 
   create_table "chatrooms", force: :cascade do |t|
@@ -55,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_07_15_201252) do
     t.bigint "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "anon"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -76,6 +88,7 @@ ActiveRecord::Schema.define(version: 2020_07_15_201252) do
     t.bigint "client_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["client_id"], name: "index_posts_on_client_id"
   end
@@ -85,6 +98,9 @@ ActiveRecord::Schema.define(version: 2020_07_15_201252) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "category_id"
+    t.integer "yearsofexp"
+    t.string "subspecialties"
     t.index ["user_id"], name: "index_providers_on_user_id"
   end
 
@@ -98,6 +114,7 @@ ActiveRecord::Schema.define(version: 2020_07_15_201252) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "availabilities", "providers"
   add_foreign_key "clients", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
