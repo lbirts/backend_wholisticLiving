@@ -8,7 +8,7 @@ holLife is a telehealth platform connected individuals with holistic practitione
     -Search holistic remedies
     -Google Shopping
 
-Backend: https://github.com/lbirts/frontend_wholisticLiving
+Frontend: https://github.com/lbirts/frontend_wholisticLiving
 
 ## How to install and use
 
