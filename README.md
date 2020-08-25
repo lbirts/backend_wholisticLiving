@@ -1,24 +1,35 @@
-# README
+# holLife
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+holLife is a telehealth platform connected individuals with holistic practitioners and information.
+ Features:
+    -Realtime messaging
+    -Realtime video chat
+    -Discussion board
+    -Search holistic remedies
+    -Google Shopping
 
-Things you may want to cover:
+Backend: https://github.com/lbirts/frontend_wholisticLiving
 
-* Ruby version
+## How to install and use
 
-* System dependencies
+Clone down this repo and the frontend repo on your computer. Cd into the backend folder and bundle install to install all the necessary dependies. After they are installed type in rails s in your terminal to get the backend going. Next, cd into the frontend folder and npm install to install all the necessary packages, afterwards type npm start to start using the application.
 
-* Configuration
+## RoadMap
 
-* Database creation
+### Things to improve upon:
+   -Overall user experience
+      -Appointment reminders
+      -Design
+   -Find holistic remedies near me not just google shopping products
+   -Include patient medical information without crying
 
-* Database initialization
+### Project Status
 
-* How to run the test suite
+Last worked on: August 2020
 
-* Services (job queues, cache servers, search engines, etc.)
+### License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
 
-* Deployment instructions
+## Authors and acknowledgement
 
-* ...
+Built by Lauren Birts, Flatiron Software Engineering Houston 04/20/2020
